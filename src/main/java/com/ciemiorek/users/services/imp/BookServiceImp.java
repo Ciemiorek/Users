@@ -2,9 +2,10 @@ package com.ciemiorek.users.services.imp;
 
 import com.ciemiorek.users.API.request.BookRequest;
 import com.ciemiorek.users.API.response.AddBookResponse;
-import com.ciemiorek.users.exception.CommonException;
+import com.ciemiorek.users.common.MsgSource;
 import com.ciemiorek.users.models.Book;
 import com.ciemiorek.users.repository.BookRepository;
+import com.ciemiorek.users.services.AbstractCommonService;
 import com.ciemiorek.users.services.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,12 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.util.Objects.isNull;
 
 @Service
-public class BookServiceImp implements BookService {
+public class BookServiceImp extends AbstractCommonService implements BookService {
 
     private  final BookRepository bookRepository;
 
-    public BookServiceImp(BookRepository bookRepository) {
+    public BookServiceImp(MsgSource msgSource ,BookRepository bookRepository) {
+        super(msgSource);
         this.bookRepository = bookRepository;
     }
 

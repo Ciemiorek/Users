@@ -1,7 +1,6 @@
 package com.ciemiorek.users.controllers;
 
 import com.ciemiorek.users.API.request.BookRequest;
-import com.ciemiorek.users.repository.BookRepository;
 import com.ciemiorek.users.services.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,6 @@ public class BookController {
 
     @GetMapping("/all")
     public ResponseEntity getBooks(){
-
         return bookService.getAllBooks();
     }
 
