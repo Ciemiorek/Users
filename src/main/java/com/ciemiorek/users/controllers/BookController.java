@@ -19,10 +19,19 @@ public class BookController {
     @PostMapping(value = "/add",produces = "application/json")
     public ResponseEntity addBook(@RequestBody BookRequest bookRequest ){
         return bookService.addBook(bookRequest);
-
-
     }
 
+    @GetMapping("/all")
+    public ResponseEntity getBooks(){
+
+        return bookService.getAllBooks();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity getBookById(@RequestParam Long id) throws Exception {
+
+        return bookService.getBookById(id);
+    }
 
 
 }

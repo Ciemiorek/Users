@@ -18,13 +18,12 @@ private final UserRepository userRepository;
 
 
     @GetMapping ("/id")
-    @ResponseBody
     public ResponseEntity getUserById(@RequestParam Long id){
             return ResponseEntity.ok(userRepository.findById(id));
     }
 
     @GetMapping("/all")
-    @ResponseBody
+
     public ResponseEntity getUsers(){
         return ResponseEntity.ok(userRepository.findAll());
     }

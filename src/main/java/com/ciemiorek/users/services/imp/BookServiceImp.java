@@ -2,11 +2,14 @@ package com.ciemiorek.users.services.imp;
 
 import com.ciemiorek.users.API.request.BookRequest;
 import com.ciemiorek.users.API.response.AddBookResponse;
+import com.ciemiorek.users.exception.CommonException;
 import com.ciemiorek.users.models.Book;
 import com.ciemiorek.users.repository.BookRepository;
 import com.ciemiorek.users.services.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.util.Objects.isNull;
@@ -27,6 +30,20 @@ public class BookServiceImp implements BookService {
         Book book = addBookToDataSource(bookRequest);
 
         return ResponseEntity.ok(new AddBookResponse("the book has been added",book.getId()));
+    }
+
+    @Override
+    public ResponseEntity getAllBooks() {
+        return ResponseEntity.ok(bookRepository.findAll());
+    }
+
+    @Override
+    public ResponseEntity getBookById(Long id) throws Exception {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if(!optionalBook.isPresent()){
+            throw  new Exception();
+        }
+        return ResponseEntity.ok(optionalBook.get());
     }
 
 

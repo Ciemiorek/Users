@@ -6,4 +6,6 @@ import org.springframework.http.ResponseEntity;
 public interface BookService {
 
 ResponseEntity addBook(BookRequest bookRequest);
+ResponseEntity getAllBooks();
+ResponseEntity getBookById(Long id) throws Exception;
 }
