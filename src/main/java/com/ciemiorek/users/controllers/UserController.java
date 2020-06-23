@@ -1,7 +1,6 @@
 package com.ciemiorek.users.controllers;
 
 import com.ciemiorek.users.API.request.UserRequest;
-import com.ciemiorek.users.repository.UserRepository;
 import com.ciemiorek.users.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ public class UserController {
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity getUserById(@RequestParam Long id) throws Exception {
+    public ResponseEntity getUserById(@RequestParam Long id)  {
             return userService.getUserByID(id);
     }
 
@@ -28,10 +27,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/add",produces = "application/json")
-    public ResponseEntity addUser(@RequestBody UserRequest userRequest) throws Exception {
+    public ResponseEntity addUser(@RequestBody UserRequest userRequest)  {
         return  userService.addUser(userRequest);
     }
 
-
+    @PutMapping(value = "/borrow", produces = "application/json")
+    public ResponseEntity borrowBook(@RequestParam double  bookIsbn, @RequestParam Long userID){
+        return userService.borrowBook(bookIsbn,userID);
+    }
 
 }

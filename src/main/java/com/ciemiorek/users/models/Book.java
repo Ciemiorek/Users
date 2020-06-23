@@ -40,6 +40,17 @@ public class Book {
     }
 
     @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn=" + isbn +
+                ", userTest=" + userTest +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }

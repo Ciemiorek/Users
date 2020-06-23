@@ -28,4 +28,10 @@ public class BasicResponse {
         this.errorMsg = errorMsg;
         this.status = ResponseStatus.ERROR;
     }
+    public static BasicResponse of(String responseMsg){
+        return new BasicResponse(responseMsg);
+    }
+    public static BasicResponse ofError(String errorCode, String errorMsg){
+        return new BasicResponse(errorCode, errorMsg);
+    }
 }
