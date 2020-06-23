@@ -1,8 +1,6 @@
 package com.ciemiorek.users.common;
 
-import lombok.Getter;
 
-@Getter
 public class ConstErrorMsg {
 
     private final String errorCode;
@@ -13,5 +11,11 @@ public class ConstErrorMsg {
         this.errorMsg = errorMsg;
     }
 
+    public String getErrorCode() {
+        return errorCode;
+    }
 
+    public String getErrorMsg() {
+        return errorMsg;
+    }
 }

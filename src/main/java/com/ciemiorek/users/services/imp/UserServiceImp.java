@@ -59,10 +59,9 @@ public class UserServiceImp extends AbstractCommonService implements UserService
     public ResponseEntity borrowBook(double bookIsbn, Long userID) {
        List <Book> bookList = isBookWithThatIsbn(bookIsbn);
 
-      Book bookOrNull = bookList.stream().filter(book -> book.getUserTest()==null)
-               .findAny()
-               .orElse(null);
-        if(bookOrNull.equals(null)){
+      Optional<Book> bookOptional = bookList.stream().filter(book -> book.getUserTest()==null)
+               .findAny();
+        if(!bookOptional.isPresent()){
             throw new CommonConflictException(msgSource.Err007);
         }
 
@@ -72,23 +71,20 @@ public class UserServiceImp extends AbstractCommonService implements UserService
         }
 
         UserTest userTest = optionalUserTest.get();
-
-        userTest.getBooks().add(bookOrNull);
-        bookOrNull.setUserTest(optionalUserTest.get());
+        Book book = bookOptional.get();
+        userTest.getBooks().add(book);
+        book.setUserTest(optionalUserTest.get());
         userRepository.save(userTest);
-        bookRepository.save(bookOrNull);
+        bookRepository.save(book);
 
         return ResponseEntity.ok(BasicResponse.of(msgSource.OK001));
     }
 
     private List<Book> isBookWithThatIsbn(double bookIsbn){
-        System.out.println(bookIsbn);
         List<Book> bookList =bookRepository.findAll().stream()
                 .filter(book -> bookIsbn==book.getIsbn())
                 .collect(Collectors.toList());
-        System.out.println("jestem tu");
-        System.out.println(bookList.isEmpty());
-        bookList.stream().forEach(book -> System.out.println(book));
+
         if(bookList.isEmpty()){
             throw new CommonConflictException(msgSource.Err003);
         }

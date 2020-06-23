@@ -4,7 +4,7 @@ import com.ciemiorek.users.common.MsgSource;
 
 public abstract class AbstractCommonService {
 
-    protected MsgSource msgSource;
+    public MsgSource msgSource;
 
     public AbstractCommonService(MsgSource msgSource) {
         this.msgSource = msgSource;
