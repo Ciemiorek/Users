@@ -25,8 +25,8 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity getBookById(@RequestParam Long id) throws Exception {
+    @GetMapping("/{id}")
+    public ResponseEntity getBookById(@RequestParam Long id)  {
 
         return bookService.getBookById(id);
     }

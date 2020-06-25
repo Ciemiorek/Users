@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-public class UserTest {
+public class UserTest implements Comparable<UserTest> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +22,7 @@ public class UserTest {
     private String surname;
     private String email;
 
-    @OneToMany
+    @OneToMany(mappedBy = "userTest", cascade = CascadeType.ALL)
     private List<Book> books = new LinkedList<>();
 
     public UserTest(String name, String surname, String email) {
@@ -54,5 +54,10 @@ public class UserTest {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(UserTest userTest) {
+        return this.getId().intValue()-userTest.getId().intValue();
     }
 }

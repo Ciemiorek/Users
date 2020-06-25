@@ -1,5 +1,6 @@
 package com.ciemiorek.users.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,16 +11,18 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Book {
+public class Book implements Comparable<Book> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String author;
     private double isbn;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userTest_id")
     private UserTest userTest;
 
 
@@ -46,12 +49,18 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", isbn=" + isbn +
-                ", userTest=" + userTest +
+                ", userTestID=" + userTest.getId() +
                 '}';
     }
 
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+
+    @Override
+    public int compareTo(Book book) {
+        return this.getId().intValue() - book.getId().intValue();
     }
 }

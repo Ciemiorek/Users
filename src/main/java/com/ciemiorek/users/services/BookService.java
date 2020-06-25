@@ -7,6 +7,6 @@ public interface BookService  {
 
 ResponseEntity addBook(BookRequest bookRequest);
 ResponseEntity getAllBooks();
-ResponseEntity getBookById(Long id) throws Exception;
+ResponseEntity getBookById(Long id) ;
 
 }

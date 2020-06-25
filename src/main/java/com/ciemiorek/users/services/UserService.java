@@ -7,5 +7,7 @@ public interface UserService {
     ResponseEntity getUserByID(Long id) ;
     ResponseEntity addUser(UserRequest userRequest) ;
     ResponseEntity getUsers();
-    ResponseEntity borrowBook(double bookIsbn, Long userID);
+    ResponseEntity borrowBook(Long bookIsbn, Long userID);
+
+    ResponseEntity returnBook(Long bookId, Long userID);
 }

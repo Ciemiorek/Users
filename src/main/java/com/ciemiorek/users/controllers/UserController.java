@@ -32,8 +32,13 @@ public class UserController {
     }
 
     @PutMapping(value = "/borrow", produces = "application/json")
-    public ResponseEntity borrowBook(@RequestParam double  bookIsbn, @RequestParam Long userID){
-        return userService.borrowBook(bookIsbn,userID);
+    public ResponseEntity borrowBook(@RequestParam Long bookId, @RequestParam Long userID){
+        return userService.borrowBook(bookId,userID);
+    }
+
+    @PutMapping(value = "/returnBook", produces = "application/json")
+    public ResponseEntity returnBook(@RequestParam Long bookId, @RequestParam Long userID){
+        return userService.returnBook(bookId,userID);
     }
 
 }
