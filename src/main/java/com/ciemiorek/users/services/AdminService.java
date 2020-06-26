@@ -10,4 +10,5 @@ import java.io.IOException;
 public interface AdminService {
 
     ResponseEntity<InputStreamResource> excelUserRaport() throws IOException;
+    ResponseEntity<InputStreamResource> excelBookRaport() throws IOException;
 }
